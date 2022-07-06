@@ -13,6 +13,8 @@ export default function Editor({ currentNote, updateNote }) {
         tasklists: true,
     })  
 
+    // console.log(converter)
+
     return (
         <section className="pane editor">
             <ReactMde

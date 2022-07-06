@@ -8,11 +8,21 @@ import {nanoid} from "nanoid";
 
 function App() {
 
-  const [notes, setNotes] = React.useState([])
+ 
+    // const changedNotes = localStorage.getItem(JSON.parse("notes"));
+    const changedNotes = JSON.parse(localStorage.getItem("notes"));
+
+    const [notes, setNotes] = React.useState( changedNotes || []);
     const [currentNoteId, setCurrentNoteId] = React.useState(
         (notes[0] && notes[0].id) || ""
     )
-    
+
+    React.useEffect(() => {
+        console.log("Effect Ran")
+        localStorage.setItem("notes", JSON.stringify(notes))
+    }, [notes]);
+
+
     function createNewNote() {
         const newNote = {
             id: nanoid(),
@@ -20,7 +30,7 @@ function App() {
         }
         setNotes(prevNotes => [newNote, ...prevNotes])
         setCurrentNoteId(newNote.id)
-    }
+    };
     
     function updateNote(text) {
         setNotes(oldNotes => oldNotes.map(oldNote => {
@@ -28,13 +38,13 @@ function App() {
                 ? { ...oldNote, body: text }
                 : oldNote
         }))
-    }
+    };
     
     function findCurrentNote() {
         return notes.find(note => {
             return note.id === currentNoteId
         }) || notes[0]
-    }
+    };
     
 
     return (
