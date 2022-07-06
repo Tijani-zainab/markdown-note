@@ -12,7 +12,7 @@ function App() {
     // const changedNotes = localStorage.getItem(JSON.parse("notes"));
     const changedNotes = JSON.parse(localStorage.getItem("notes"));
 
-    const [notes, setNotes] = React.useState( changedNotes || []);
+    const [notes, setNotes] = React.useState( () => changedNotes || []);
     const [currentNoteId, setCurrentNoteId] = React.useState(
         (notes[0] && notes[0].id) || ""
     )
