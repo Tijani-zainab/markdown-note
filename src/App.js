@@ -24,6 +24,11 @@ function App() {
     }, [notes]);
 
 
+    //function deleteNote(event, noteId) {
+    //  event.stopPropagation()
+        
+    //}
+
     function createNewNote() {
         const newNote = {
             id: nanoid(),
@@ -34,7 +39,7 @@ function App() {
     };
     
     function updateNote(text) {
-         // Put the most recently-modified note at the top
+         // puts the most recently-modified note at the top
         setNotes(oldNotes => {
             const emptyArr = [];
 
