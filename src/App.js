@@ -18,8 +18,9 @@ function App() {
     )
 
     React.useEffect(() => {
-        console.log("Effect Ran")
+        // console.log("Effect Ran")
         localStorage.setItem("notes", JSON.stringify(notes))
+        //console.log((notes[0].body.Split("\n")))
     }, [notes]);
 
 
@@ -33,19 +34,33 @@ function App() {
     };
     
     function updateNote(text) {
-        setNotes(oldNotes => oldNotes.map(oldNote => {
-            return oldNote.id === currentNoteId
-                ? { ...oldNote, body: text }
-                : oldNote
-        }))
+         // Put the most recently-modified note at the top
+        setNotes(oldNotes => {
+            const emptyArr = [];
+
+            for(let i = 0; i < oldNotes.length; i++) {
+                const oldNote = oldNotes[i];
+                if(oldNote.id === currentNoteId) {
+                    emptyArr.unshift({ ...oldNote, body: text })
+                } else {
+                    emptyArr.push(oldNote)
+                }
+
+            }
+            return emptyArr
+        })
+
     };
     
     function findCurrentNote() {
         return notes.find(note => {
             return note.id === currentNoteId
         }) || notes[0]
+        
     };
-    
+
+    console.log(findCurrentNote())
+
 
     return (
       <main>
