@@ -143,6 +143,7 @@ button:focus {
   display: none;
   background: none;
   border: none;
+  color: #fff;
 }
 
 .title:hover > .delete-btn {

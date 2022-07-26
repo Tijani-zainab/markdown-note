@@ -24,15 +24,17 @@ function App() {
     }, [notes]);
 
 
-    //function deleteNote(event, noteId) {
-    //  event.stopPropagation()
+    function deleteNote(event, noteId) {
+        event.stopPropagation()
+        setNotes(prevNotes =>  prevNotes.filter(note =>  note.id !== noteId )
         
-    //}
+        //console.log("delete btn works", noteId)
+    )}
 
     function createNewNote() {
         const newNote = {
             id: nanoid(),
-            body: "# Type your markdown note's title here"
+            body: `# Type your markdown note's title here`
         }
         setNotes(prevNotes => [newNote, ...prevNotes])
         setCurrentNoteId(newNote.id)
@@ -64,7 +66,7 @@ function App() {
         
     };
 
-    console.log(findCurrentNote())
+    //.log(findCurrentNote())
 
 
     return (
@@ -82,6 +84,7 @@ function App() {
                     currentNote={findCurrentNote()}
                     setCurrentNoteId={setCurrentNoteId}
                     newNote={createNewNote}
+                    deleteNote={deleteNote}
                 />
                 {
                     currentNoteId && 
