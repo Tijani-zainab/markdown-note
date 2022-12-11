@@ -66,7 +66,8 @@ function App() {
         
     };
 
-    //.log(findCurrentNote())
+    //console.log(findCurrentNote())
+    //console.log(window.innerHeight)
 
 
     return (
